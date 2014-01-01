@@ -1,7 +1,7 @@
-package com.vasoftware.sf.server.apps.sfmain.cache.memcached;
+package org.cachet.support.memcached;
 
-import com.vasoftware.sf.server.apps.sfmain.cache.CacheException;
-import com.vasoftware.sf.server.apps.sfmain.cache.CacheWrapper;
+import org.cachet.core.CacheException;
+import org.cachet.core.CacheWrapper;
 import net.spy.memcached.MemcachedClient;
 
 /**

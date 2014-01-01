@@ -1,8 +1,8 @@
-package com.vasoftware.sf.server.apps.sfmain.cache.infinispan;
+package org.cachet.support.infinispan;
 
-import com.vasoftware.sf.server.apps.sfmain.cache.CacheException;
-import com.vasoftware.sf.server.apps.sfmain.cache.CacheManagerWrapper;
-import com.vasoftware.sf.server.apps.sfmain.cache.CacheWrapper;
+import org.cachet.core.CacheException;
+import org.cachet.core.CacheManagerWrapper;
+import org.cachet.core.CacheWrapper;
 
 
 import org.apache.commons.lang.StringUtils;
@@ -125,7 +125,7 @@ public class InfinispanCacheManager implements CacheManagerWrapper {
     }
 
     @Override
-    public <K, V> CacheWrapper<K, V> getCache(String name) throws IllegalArgumentException, com.vasoftware.sf.server.apps.sfmain.cache.CacheException {
+    public <K, V> CacheWrapper<K, V> getCache(String name) throws IllegalArgumentException, CacheException {
         if (StringUtils.isEmpty(name)) {
             throw new IllegalArgumentException("Cache name cannot be null or empty.");
         }
