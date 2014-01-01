@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.sf.net/ehcache.xsd">
+
+	<diskStore path="/tmp/EHCacheTempMemory" />
+
+	<defaultCache maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="10" timeToLiveSeconds="20" statistics="true" memoryStoreEvictionPolicy="LRU"/>
+
+	<!-- <cacheManagerPeerListenerFactory class="org.terracotta.ehcachedx.monitor.probe.ProbePeerListenerFactory" properties="monitorAddress=localhost, monitorPort=9889, memoryMeasurement=true"/> -->
+
+</ehcache>
