@@ -7,12 +7,12 @@ package org.cachet.core;
  * Time: 23:17
  * To change this template use File | Settings | File Templates.
  */
-public interface CacheManagerWrapper {
+public interface CacheManager {
 
-    public <K, V> CacheWrapper<K, V> getCache(String name) throws CacheException;
+    public <K, V> Cache<K, V> getCache(String name) throws CacheException;
 
     // not needed, has to be handled by get cache
-    // void addCache(CacheWrapper cache);
+    // void addCache(Cache cache);
 
     void removeCache(String name);
 

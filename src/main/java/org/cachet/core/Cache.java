@@ -7,7 +7,7 @@ package org.cachet.core;
  * Time: 14:54
  * To change this template use File | Settings | File Templates.
  */
-public interface CacheWrapper<K, V> {
+public interface Cache<K, V> {
 
     public V get(K key) throws CacheException;
 

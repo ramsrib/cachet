@@ -1,24 +1,23 @@
 package org.cachet.support.memcached;
 
-import org.cachet.core.CacheException;
-import org.cachet.core.CacheWrapper;
 import net.spy.memcached.MemcachedClient;
+import org.cachet.core.Cache;
+import org.cachet.core.CacheException;
 
 /**
  * Created by sriram on 17/12/13.
  */
-public class MemCache<K, V> implements CacheWrapper<K, V>  {
+public class MemCache<K, V> implements Cache<K, V> {
 
-        private MemcachedClient cache;
+    private MemcachedClient cache;
 
-    // namespace to differentiate each cache from one another.
-        private final String NAMESPACE= "TEAMFORGE:5d41402abc4b2a76b9719d91101";
-        private static final int ttl = 0;
-        private static final String options = "0";
+    // namespace to differentiate each cache from other
+    private final String NAMESPACE = "CACHET:5d41402abc4b2a76b9719d91101";
+    private static final int ttl = 0;
+    private static final String options = "0";
 
 
-
-        public MemCache(MemcachedClient cache) {
+    public MemCache(MemcachedClient cache) {
             if (cache == null) {
                 throw new IllegalArgumentException("Cache argument cannot be null.");
             }

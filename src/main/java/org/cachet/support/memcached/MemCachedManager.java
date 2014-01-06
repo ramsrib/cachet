@@ -1,19 +1,23 @@
 package org.cachet.support.memcached;
 
-import org.cachet.core.CacheException;
-import org.cachet.core.CacheManagerWrapper;
-import org.cachet.core.CacheWrapper;
 import net.spy.memcached.AddrUtil;
 import net.spy.memcached.BinaryConnectionFactory;
 import net.spy.memcached.MemcachedClient;
+import org.cachet.core.Cache;
+import org.cachet.core.CacheException;
+import org.cachet.core.CacheManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * Created by sriram on 17/12/13.
  */
-public class MemCachedManager implements CacheManagerWrapper {
+public class MemCachedManager implements CacheManager {
+
+    private static final Logger log = LoggerFactory.getLogger(MemCachedManager.class);
+
 
     private MemcachedClient mCacheManager;
     private static MemcachedClient[] m = null;
@@ -28,7 +32,7 @@ public class MemCachedManager implements CacheManagerWrapper {
     }
 
     @Override
-    public <K, V> CacheWrapper<K, V> getCache(String name) throws CacheException {
+    public <K, V> Cache<K, V> getCache(String name) throws CacheException {
 
         MemcachedClient c= null;
         try {
@@ -44,7 +48,7 @@ public class MemCachedManager implements CacheManagerWrapper {
     }
 
     //@Override
-    public void addCache(CacheWrapper cache) {
+    public void addCache(Cache cache) {
         // not needed, get cache has to handle this
         //mCacheManager.addCache(cache);
     }

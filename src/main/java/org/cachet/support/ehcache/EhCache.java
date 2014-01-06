@@ -1,12 +1,8 @@
 package org.cachet.support.ehcache;
 
-import org.cachet.core.CacheException;
-import org.cachet.core.CacheManagerWrapper;
-import org.cachet.core.CacheWrapper;
-
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
+import org.cachet.core.Cache;
+import org.cachet.core.CacheException;
 
 
 /**
@@ -16,14 +12,14 @@ import net.sf.ehcache.Element;
  * Time: 14:55
  * To change this template use File | Settings | File Templates.
  */
-public class EhCache<K,V> implements CacheWrapper<K,V> {
+public class EhCache<K, V> implements Cache<K, V> {
 
 //    private final String cacheName;
-//    private final CacheManagerWrapper cacheManager;
+//    private final CacheManager cacheManager;
 
     private net.sf.ehcache.Ehcache cache;
 
-/*    public EhCache(String cacheName, CacheManagerWrapper cacheManager) {
+/*    public EhCache(String cacheName, CacheManager cacheManager) {
         this.cacheName = cacheName;
         this.cacheManager = cacheManager;
     }*/
@@ -37,7 +33,7 @@ public class EhCache<K,V> implements CacheWrapper<K,V> {
 
 
 /*    @Override
-    public CacheWrapper getCache() throws CacheException {
+    public Cache getCache() throws CacheException {
         return cacheManager.getCache(cacheName);
     }*/
 
