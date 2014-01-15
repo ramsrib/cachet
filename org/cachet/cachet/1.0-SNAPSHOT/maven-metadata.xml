@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata modelVersion="1.1.0">
-  <groupId>cachet</groupId>
+  <groupId>org.cachet</groupId>
   <artifactId>cachet</artifactId>
   <version>1.0-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20140115.090226</timestamp>
+      <timestamp>20140115.090747</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20140115090226</lastUpdated>
+    <lastUpdated>20140115090747</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>1.0-20140115.090226-1</value>
-        <updated>20140115090226</updated>
+        <value>1.0-20140115.090747-1</value>
+        <updated>20140115090747</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>1.0-20140115.090226-1</value>
-        <updated>20140115090226</updated>
+        <value>1.0-20140115.090747-1</value>
+        <updated>20140115090747</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>

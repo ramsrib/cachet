@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <groupId>cachet</groupId>
+  <groupId>org.cachet</groupId>
   <artifactId>cachet</artifactId>
   <versioning>
     <versions>
       <version>1.0-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20140115090226</lastUpdated>
+    <lastUpdated>20140115090747</lastUpdated>
   </versioning>
 </metadata>
