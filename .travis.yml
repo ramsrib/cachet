@@ -1,0 +1,9 @@
+# blacklist branches
+branches:
+  except:
+    - mvn-repo
+# whitelist branches
+branches:
+  only:
+    - master
+    - stable
