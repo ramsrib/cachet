@@ -5,3 +5,13 @@ script: mvn clean deploy
 env:
   global:
     secure: glNj/e0THGl2B+yyVJQcGezH7EYCzKqXqrIXRFTe25LPtnS6gcJkYN2APObEdLCPpMGt/B4LkQRv3BdLi2gGTt7sFMo/lpaNY7iWhNJDuI+CUMkB0wt844sqQXx2eYUtMf5arFe8FbzBfFqWjQcJEL5hKB1/OgeViptpuFyUXZs=
+
+# blacklist branches
+branches:
+  except:
+    - mvn-repo
+# whitelist branches
+branches:
+  only:
+    - master
+    - stable
