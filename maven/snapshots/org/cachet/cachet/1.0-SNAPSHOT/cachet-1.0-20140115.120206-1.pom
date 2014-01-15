@@ -34,16 +34,21 @@
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.8</version>
                 <configuration>
-                    <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
-                    <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
-                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-                    <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
+                    <message>Maven artifacts for ${project.version}</message>
+                    <noJekyll>true</noJekyll>
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <!-- <dryRun>true</dryRun> -->
+                    <branch>refs/heads/mvn-repo</branch>
+                    <path>maven/snapshots</path>
                     <includes><include>**/*</include></includes>
-                    <repositoryName>cachet</repositoryName>      <!-- github repo name -->
-                    <repositoryOwner>ramsrib</repositoryOwner>    <!-- github username  -->
+                    <repositoryName>cachet</repositoryName>
+                    <repositoryOwner>ramsrib</repositoryOwner>
+                    <!-- This token, obtained from https://github.com/settings/applications,
+                                                encrypted using http://about.travis-ci.org/docs/user/build-configuration/#Secure-environment-variables,
+                                                is like a password; encrypt & guard it carefully! -->
+                    <oauth2Token>${env.TOKEN}</oauth2Token>
                 </configuration>
                 <executions>
-                    <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
                     <execution>
                         <goals>
                             <goal>site</goal>
@@ -101,7 +106,6 @@
         </repository>
     </distributionManagement>
     <properties>
-        <!-- github server corresponds to entry in ~/.m2/settings.xml -->
         <github.global.server>github</github.global.server>
     </properties>
 </project>
