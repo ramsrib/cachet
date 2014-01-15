@@ -37,15 +37,14 @@
                     <message>Maven artifacts for ${project.version}</message>
                     <noJekyll>true</noJekyll>
                     <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <!-- This isn't perfect, because every old SNAPSHOT is kept.. -->
+                    <!-- <merge>true</merge> -->
                     <!-- <dryRun>true</dryRun> -->
                     <branch>refs/heads/mvn-repo</branch>
                     <path>maven/snapshots</path>
                     <includes><include>**/*</include></includes>
                     <repositoryName>cachet</repositoryName>
                     <repositoryOwner>ramsrib</repositoryOwner>
-                    <!-- This token, obtained from https://github.com/settings/applications,
-                                                encrypted using http://about.travis-ci.org/docs/user/build-configuration/#Secure-environment-variables,
-                                                is like a password; encrypt & guard it carefully! -->
                     <oauth2Token>${env.TOKEN}</oauth2Token>
                 </configuration>
                 <executions>
