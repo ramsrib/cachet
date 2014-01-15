@@ -22,6 +22,11 @@ public class InfinispanCacheManager implements CacheManager {
 
 
     private static final Logger log = LoggerFactory.getLogger(InfinispanCacheManager.class);
+/*
+    <cache-container name="cachetContainer" default-cache="default" jndi-name="java:jboss/infinispan/container/cachetContainer" start="EAGER">
+        <local-cache name="default"/>
+    </cache-container>
+*/
 
     // resource injection is not working in the ejb 2.1
     // may be we can pack this in a separate jar to make it work
@@ -30,27 +35,15 @@ public class InfinispanCacheManager implements CacheManager {
     @Resource(lookup = "java:jboss/infinispan/container/cachetContainer")
     private org.infinispan.manager.EmbeddedCacheManager mCacheManager;
 
+    @Resource(mappedName = "java:jboss/infinispan/container/cachetContainer")
+    private org.infinispan.manager.EmbeddedCacheManager mCacheManager1;
+
     public InfinispanCacheManager() {
 
-        if (mCacheManager == null) {
-            if (log.isInfoEnabled()) {
-                log.trace("Cache is not injected, initializing manually.");
-            }
-            try {
-                mCacheManager = (EmbeddedCacheManager) new InitialContext().lookup("java:jboss/infinispan/container/cachetContainer");
-            } catch (NamingException e) {
-                e.printStackTrace();
-            }
-            if (log.isInfoEnabled()) {
-                log.trace("Initialized the cache manager manually");
-            }
-            //mCacheManager = new DefaultCacheManager();
-        } else {
-            if (log.isInfoEnabled()) {
-                log.trace("Cache manager was already initialized successfully");
-            }
-        }
+    }
 
+    public InfinispanCacheManager(EmbeddedCacheManager cacheManager){
+        this.mCacheManager = cacheManager;
     }
 
     public InfinispanCacheManager(String configFile) {
@@ -62,8 +55,42 @@ public class InfinispanCacheManager implements CacheManager {
         }
     }
 
+    private void init() {
+        if (mCacheManager1 == null) {
+            log.info("mCacheManager1 (mappedName) is null.");
+        }
+        if (mCacheManager == null) {
+            if (log.isInfoEnabled()) {
+                log.info("Cache Manager is not injected, initializing manually.");
+            }
+            try {
+                mCacheManager = (EmbeddedCacheManager) new InitialContext().lookup("java:jboss/infinispan/container/cachetContainer");
+            } catch (NamingException e) {
+                e.printStackTrace();
+            }
+            if (mCacheManager == null) {
+                log.info("Fallback to hibernate cache container.");
+                try {
+                    mCacheManager = (EmbeddedCacheManager) new InitialContext().lookup("java:jboss/infinispan/container/hibernate");
+                } catch (NamingException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (log.isInfoEnabled()) {
+                log.info("Initialized the cache manager manually");
+            }
+            //mCacheManager = new DefaultCacheManager();
+        } else {
+            System.out.println("Cache Manager initialized automatically using @Resource");
+            if (log.isInfoEnabled()) {
+                log.info("Cache manager was already initialized successfully");
+            }
+        }
+    }
+
     @Override
     public <K, V> Cache<K, V> getCache(String name) throws IllegalArgumentException, CacheException {
+
         if (StringUtils.isEmpty(name)) {
             throw new IllegalArgumentException("Cache name cannot be null or empty.");
         }
@@ -101,9 +128,8 @@ public class InfinispanCacheManager implements CacheManager {
 
     @Override
     public String[] getAllCaches() {
+        init();
         Set<String> caches = mCacheManager.getCacheNames();
-        // return (String[]) caches.toArray();
-        // or
         return caches.toArray(new String[0]);
     }
 }
