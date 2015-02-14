@@ -6,6 +6,7 @@ import org.cachet.core.CacheManager;
 import org.cachet.support.ehcache.EhCacheManager;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -43,6 +44,7 @@ public class EhCacheManagerTest {
     }
 
     @Test
+    @Ignore
     public void testGetCache() {
 
         CacheManager cacheManager = new EhCacheManager();
@@ -68,6 +70,7 @@ public class EhCacheManagerTest {
 
 
     @Test
+    @Ignore
     public void testPutCache() {
 
         CacheManager cacheManager = new EhCacheManager();
