@@ -22,6 +22,8 @@ public class InfinispanCacheManager implements CacheManager {
 
 
     private static final Logger log = LoggerFactory.getLogger(InfinispanCacheManager.class);
+
+    private static boolean initialized = false;
 /*
     <cache-container name="cachetContainer" default-cache="default" jndi-name="java:jboss/infinispan/container/cachetContainer" start="EAGER">
         <local-cache name="default"/>
@@ -64,7 +66,7 @@ public class InfinispanCacheManager implements CacheManager {
                 log.info("Cache Manager is not injected, initializing manually.");
             }
             try {
-                mCacheManager = (EmbeddedCacheManager) new InitialContext().lookup("java:jboss/infinispan/container/cachetContainer");
+                mCacheManager = (EmbeddedCacheManager) new InitialContext().lookup("java:jboss/infinispan/container/cachet");
             } catch (NamingException e) {
                 e.printStackTrace();
             }
@@ -86,6 +88,8 @@ public class InfinispanCacheManager implements CacheManager {
                 log.info("Cache manager was already initialized successfully");
             }
         }
+        initialized = true;
+
     }
 
     @Override
@@ -128,7 +132,9 @@ public class InfinispanCacheManager implements CacheManager {
 
     @Override
     public String[] getAllCaches() {
-        init();
+        if(!initialized) {
+            init();
+        }
         Set<String> caches = mCacheManager.getCacheNames();
         return caches.toArray(new String[0]);
     }

@@ -9,7 +9,7 @@ An Abstract Caching Framework
 
 ####Goals :
 * Provide support for existing caching frameworks like JCS & Hazelcast.
-* Provide support to cache configuration API.
+* Provide support to client configuration API.
 * Provide support for Tree Cache API.
 * Implement high-performing Tree like Caching.
 

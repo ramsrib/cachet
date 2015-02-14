@@ -9,49 +9,49 @@ import org.cachet.core.CacheException;
  */
 public class MemCache<K, V> implements Cache<K, V> {
 
-    private MemcachedClient cache;
+    private MemcachedClient client;
 
-    // namespace to differentiate each cache from other
-    private final String NAMESPACE = "CACHET:5d41402abc4b2a76b9719d91101";
+    // namespace to differentiate each client from other
+    private final String CACHE_REGION = "CACHET:";
     private static final int ttl = 0;
     private static final String options = "0";
 
 
-    public MemCache(MemcachedClient cache) {
-            if (cache == null) {
+    public MemCache(MemcachedClient client) {
+            if (client == null) {
                 throw new IllegalArgumentException("Cache argument cannot be null.");
             }
-            this.cache = cache;
+            this.client = client;
         }
 
 
         @Override
         public V get(K key) throws CacheException {
 
-            Object o = cache.get(NAMESPACE + key);
-            if(o == null) {
+            Object cacheObject = client.get(CACHE_REGION + key);
+            if(cacheObject == null) {
                 System.out.println("Cache MISS for KEY: " + key);
             } else {
                 System.out.println("Cache HIT for KEY: " + key);
             }
-            return (V) o;
+            return (V) cacheObject;
         }
 
         @Override
         public void put(K key, V value) throws CacheException {
-            cache.set(NAMESPACE + key, ttl, options);
+            client.set(CACHE_REGION + key, ttl, options);
         }
 
         @Override
         public V remove(K key) throws CacheException {
-            cache.delete(NAMESPACE + key);
+            client.delete(CACHE_REGION + key);
             return null;
         }
 
         @Override
         public void clear() throws CacheException {
             try {
-                //cache.removeAll();
+                //client.removeAll();
             } catch (Throwable t) {
                 throw new CacheException(t);
             }
@@ -60,7 +60,7 @@ public class MemCache<K, V> implements Cache<K, V> {
 
         public int size() throws CacheException {
             try {
-                //return cache.getSize();
+                //return client.getSize();
             } catch (Throwable t) {
                 throw new CacheException(t);
             }
@@ -68,7 +68,7 @@ public class MemCache<K, V> implements Cache<K, V> {
         }
 
         public String toString() {
-            return "MemCached [" + cache + "]";
+            return "MemCached [" + client + "]";
         }
 
     }

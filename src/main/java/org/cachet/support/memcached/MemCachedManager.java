@@ -53,6 +53,13 @@ public class MemCachedManager implements CacheManager {
         //mCacheManager.addCache(cache);
     }
 
+/*
+    public void createCache(Cache cache) {
+        // not needed, get cache has to handle this
+        //mCacheManager.addCache(cache);
+    }
+   */
+
     @Override
     public void removeCache(String name) {
     }

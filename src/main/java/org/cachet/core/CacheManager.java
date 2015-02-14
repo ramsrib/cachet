@@ -9,10 +9,12 @@ package org.cachet.core;
  */
 public interface CacheManager {
 
-    public <K, V> Cache<K, V> getCache(String name) throws CacheException;
+    <K, V> Cache<K, V> getCache(String name) throws CacheException;
+
+//    <K,V> void putCache(String name, K key, V value) throws CacheException;
 
     // not needed, has to be handled by get cache
-    // void addCache(Cache cache);
+    void addCache(Cache cache);
 
     void removeCache(String name);
 

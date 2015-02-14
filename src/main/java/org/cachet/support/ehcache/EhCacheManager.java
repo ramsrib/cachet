@@ -1,5 +1,6 @@
 package org.cachet.support.ehcache;
 
+import net.sf.ehcache.Element;
 import org.cachet.core.Cache;
 import org.cachet.core.CacheException;
 import org.cachet.core.CacheManager;
@@ -35,6 +36,7 @@ public class EhCacheManager implements CacheManager {
     public <K, V> Cache<K, V> getCache(String name) throws CacheException {
         try {
             net.sf.ehcache.Ehcache cache = mCacheManager.getEhcache(name);
+            cache.removeAll();
             if (cache == null) {
                 mCacheManager.addCache(name);
                 cache = mCacheManager.getCache(name);
@@ -44,6 +46,21 @@ public class EhCacheManager implements CacheManager {
             throw new CacheException(e);
         }
     }
+
+/*    @Override
+    public <K, V> void putCache(String name, K key, V value) throws CacheException {
+        try {
+            net.sf.ehcache.Ehcache cache = mCacheManager.getEhcache(name);
+            if (cache != null) {
+                Element element = new Element(key, value);
+                cache.put(element);
+            } else {
+                throw new CacheException(name + " Cache not found.");
+            }
+        } catch (net.sf.ehcache.CacheException e) {
+            throw new CacheException(e);
+        }
+    }*/
 
     //@Override
     public void addCache(Cache cache) {
