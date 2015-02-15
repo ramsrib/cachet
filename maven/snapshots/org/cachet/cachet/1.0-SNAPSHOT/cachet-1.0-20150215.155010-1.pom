@@ -32,6 +32,10 @@
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
+                <!--Changes in github tree api causes the commit failure and changing the user's email to public
+                 will help to commit the object in 0.10 version and private email still fails
+                 https://github.com/github/maven-plugins/issues/69
+                 -->
                 <version>0.10</version>
                 <configuration>
                     <message>Maven artifacts for ${project.version}</message>
